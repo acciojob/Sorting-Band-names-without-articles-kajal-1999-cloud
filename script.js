@@ -1,39 +1,33 @@
-//your code here
+// let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
 
-//your code here
+// let new_arr = [] ;
 
-let bandNames = ['The Beatles', 'Aerosmith', 'Pink Floyd', 'The Rolling Stones', 'Led Zeppelin'];
+// for(let i =0 ; i<touristSpots.length ; i++) {
+// 	new_arr = touristSpots[i] ;
+// 	let split_str =
+// }
 
-function removeArticles(name) {
-  // Define an array of articles to be excluded
-  const articles = ['the', 'a', 'an'];
+let bandNames = ['The Rolling Stones', 'Led Zeppelin', 'Aerosmith', 'The Beatles'];
 
-  // Split the name into words
+// Remove articles from band names
+const removeArticles = (name) => {
+  const articles = ['a', 'an', 'the'];
   const words = name.split(' ');
+  return words.filter((word) => !articles.includes(word.toLowerCase())).join(' ');
+};
 
-  // Filter out the articles from the words array
-  const filteredWords = words.filter((word) => !articles.includes(word.toLowerCase()));
+// Sort band names without articles in lexicographic order
+bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
 
-  // Join the filtered words back into a string
-  const filteredName = filteredWords.join(' ');
+// Generate HTML list
+let ul = document.createElement('ul');
+ul.id = 'band';
 
-  return filteredName;
-}
-
-// Sort the band names in lexicographic order while excluding articles
-const sortedBandNames = bandNames.sort((a, b) => {
-  const nameA = removeArticles(a);
-  const nameB = removeArticles(b);
-  return nameA.localeCompare(nameB);
+bandNames.forEach((name) => {
+  let li = document.createElement('li');
+  li.textContent = name;
+  ul.appendChild(li);
 });
 
-// Get the <ul> element with the id 'band'
-const bandList = document.getElementById('band');
-
-// Create <li> elements for each band name and append them to the <ul> element
-sortedBandNames.forEach((bandName) => {
-  const li = document.createElement('li');
-  li.textContent = bandName;
-  bandList.appendChild(li);
-});
-
+// Append the list to the body or any other element in your HTML
+document.body.appendChild(ul);
